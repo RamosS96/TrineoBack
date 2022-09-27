@@ -5,10 +5,29 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Trineo - Carga</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
 </head>
 <body>
-    <form>
-        
+    <h1>Carga de partidos</h1>
+    <form id="Statsform">
+        <input type="search" id="Stats-rival" placeholder="Rival"/>
+        <input type="search" id="Stats-img" placeholder="Link de la Imagen del partido"/>
+        <input type="number" id="Stats-GF" placeholder="Goles a favor"/>
+        <input type="number" id="Stats-GC" placeholder="Goles en contra"/>
+        <input type="number" id="Stats-FOULS" placeholder="Fouls Trineo"/>
+        <input type="number" id="Stats-FOULSRIV" placeholder="Fouls Rival"/>
+        <input type="number" id="Stats-REM"placeholder="Remates Trineo"/>
+        <input type="number" id="Stats-REMRIV" placeholder="Remates Rival"/>
+        <input type="date" id="Stats-date" placeholder="Fecha"/>
+        <input type="number" id="Stats-TA" placeholder="Amarillas Trineo"/>
+        <input type="number" id="Stats-TAR" placeholder="Amarillas Rival"/>
+        <input type="number" id="Stats-TR" placeholder="Rojas Trineo"/>
+        <input type="number" id="Stats-TRR" placeholder="Rojas Rival"/>
+        <input type="number" id="Stats-POS" placeholder="Posesion Trineo"/>
+    <textarea id="Stats-GOALS" placeholder="Incidencias (usar formato 8' Apellido, 10' Apellido)"></textarea>
+    <button type="submit"id="stats-submit">Enviar a BD</button>
     </form>
+    <script type="module" defer src="main.js"></script>
 </body>
 </html>
