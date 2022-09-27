@@ -1,18 +1,18 @@
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
-import firebase from 'firebase/compat/app';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+import { getFirestore, collection,addDoc,doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyC4j7iBZ84btYBcd8ANWP0VLEHJUas2PJ4",
-    authDomain: "trineo-app.firebaseapp.com",
-    projectId: "trineo-app",
-    storageBucket: "trineo-app.appspot.com",
-    messagingSenderId: "495252829451",
-    appId: "1:495252829451:web:8045ab795194e571e7de0e",
-    measurementId: "G-3289JK9TW1"
+  apiKey: "AIzaSyC4j7iBZ84btYBcd8ANWP0VLEHJUas2PJ4",
+  authDomain: "trineo-app.firebaseapp.com",
+  projectId: "trineo-app",
+  storageBucket: "trineo-app.appspot.com",
+  messagingSenderId: "495252829451",
+  appId: "1:495252829451:web:8045ab795194e571e7de0e",
+  measurementId: "G-3289JK9TW1"
 };
 
-initializeApp(firebaseConfig);
-const db = firestore();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const statsform = document.getElementById('Statsform')
 const statsimg = document.getElementById('Stats-img')
@@ -32,25 +32,32 @@ const statsGOALS = document.getElementById('Stats-GOALS')
 const statssubmit = document.getElementById('stats-submit')
 const statsrival = document.getElementById('Stats-rival')
 
+const handleNewSatat = () => {
+    const docRef = collection(db, 'matches')
+    const payload = {
+      FOULS: statsFOULS.value,
+      FOULSRIV: statsFOULSRIV.value,
+      GC: statsGC.value,
+      GF: statsGF.value,
+      GOALS: statsGOALS.value,
+      POS: statsPOS.value,
+      REM: statsREM.value,
+      REMRIV: statsREMRIV.value,
+      TA: statsTA.value,
+      TAR: statsTAR.value,
+      TR: statsTR.value,
+      TRR: statsTRR.value,
+      date: statsdate.value,
+      img: statsimg.value,
+      rival: statsrival.value
+    };
+    addDoc(docRef, payload)
+  }
+
 statssubmit.addEventListener("click", (e) => {
-    e.preventDefault();
-    db.collection('matches').doc().set({
-        FOULS: statsFOULS.value,
-        FOULSRIV: statsFOULSRIV.value,
-        GC: statsGC.value,
-        GF: statsGF.value,
-        GOALS: statsGOALS.value,
-        POS: statsPOS.value,
-        REM: statsREM.value,
-        REMRIV: statsREMRIV.value,
-        TA: statsTA.value,
-        TAR: statsTAR.value,
-        TR: statsTR.value,
-        TRR: statsTRR.value,
-        date: statsdate.value,
-        img: statsimg.value,
-        rival: statsrival.value
-    }).then(()=>{
-        statsform.reset()
-    })
-})
+      
+    e.preventDefault()
+    handleNewSatat()
+
+  
+  })
